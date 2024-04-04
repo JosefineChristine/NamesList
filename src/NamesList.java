@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -35,7 +37,7 @@ public class NamesList {
     private void showMenu() {
         System.out.println("""
                 1) Display list of names
-                2) Load list of names (not implemented)
+                2) Load list of names
                 3) Save list of names (not implemented)
                 4) Enter names
                 0) Exit
@@ -66,8 +68,20 @@ public class NamesList {
     }
 
     private void loadListOfNames() {
-        // TODO: Implement load of the names list from a file
-        System.out.println("NOT IMPLEMENTED");
+        try {
+            File file = new File("names.txt");
+            Scanner sc = new Scanner(file);
+
+            String name = "-nothing yet-";
+            while (sc.hasNextLine()) {
+                name = sc.nextLine();
+                names.add(name);
+            }
+            System.out.println("list of names loaded successfully");
+        }
+        catch (FileNotFoundException fnfe) {
+            System.out.println("File not found");
+        }
     }
 
     private void displayListOfNames() {
