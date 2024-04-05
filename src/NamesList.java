@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -38,7 +39,7 @@ public class NamesList {
         System.out.println("""
                 1) Display list of names
                 2) Load list of names
-                3) Save list of names (not implemented)
+                3) Save list of names
                 4) Enter names
                 0) Exit
                 """);
@@ -63,8 +64,16 @@ public class NamesList {
     }
 
     private void saveListOfNames() {
-        // TODO: Implement save of the names list to a file
-        System.out.println("NOT IMPLEMENTED");
+        try {
+            PrintStream saveFile = new PrintStream("names.txt");
+            for (String name : names) {
+                saveFile.println(name);
+            }
+            saveFile.close(); //Skal måske slettes? Er måske noget med
+            System.out.println("List of names saved successfully");
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred while saving the names.");
+        }
     }
 
     private void loadListOfNames() {
